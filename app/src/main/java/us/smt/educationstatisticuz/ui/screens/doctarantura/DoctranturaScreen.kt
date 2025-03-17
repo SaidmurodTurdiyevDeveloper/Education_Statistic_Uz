@@ -1,4 +1,4 @@
-package us.smt.educationstatisticuz
+package us.smt.educationstatisticuz.ui.screens.doctarantura
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -8,9 +8,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 
-const val professionalTalim = "ProfessionalTalim"
+const val doktantura = "Doktorantura"
+
 @Composable
-fun ProfessionalTalimScreen(modifier: Modifier = Modifier) {
+fun DoctranturaScreen(modifier: Modifier = Modifier) {
     Column(
         modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,

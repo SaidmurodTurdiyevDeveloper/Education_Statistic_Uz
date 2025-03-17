@@ -1,8 +1,7 @@
-package us.smt.educationstatisticuz
+package us.smt.educationstatisticuz.ui.screens.oliy_talim.umuiy_tab
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -11,94 +10,31 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.ScrollableTabRow
-import androidx.compose.material3.Tab
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import us.smt.educationstatisticuz.component.CircularDiagram
-import us.smt.educationstatisticuz.component.UzbekistanMap
-import us.smt.educationstatisticuz.component.VerticalDiagram
+import androidx.lifecycle.viewmodel.compose.viewModel
 import us.smt.educationstatisticuz.model.CommonDiagramData
 import us.smt.educationstatisticuz.model.DiagramData
 import us.smt.educationstatisticuz.model.DiagramDataWithColor
-
-const val oliyTalim = "Oliy talim"
-
-@Composable
-fun OliyTalimScreen() {
-    val selectedTab = remember {
-        mutableStateOf(0)
-    }
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
-    ) {
-        ScrollableTabRow(
-            selectedTabIndex = selectedTab.value
-        ) {
-            Tab(selected = selectedTab.value == 0, onClick = { selectedTab.value = 0 }) {
-                Text(
-                    "Umumiy",
-                    modifier = Modifier.padding(12.dp),
-                    style = MaterialTheme.typography.titleLarge
-                )
-            }
-            Tab(selected = selectedTab.value == 1, onClick = { selectedTab.value = 1 }) {
-                Text(
-                    "Talabalar",
-                    modifier = Modifier.padding(12.dp),
-                    style = MaterialTheme.typography.titleLarge
-                )
-            }
-            Tab(selected = selectedTab.value == 2, onClick = { selectedTab.value = 2 }) {
-                Text(
-                    "O'qituvchilar",
-                    modifier = Modifier.padding(12.dp),
-                    style = MaterialTheme.typography.titleLarge
-                )
-            }
-            Tab(selected = selectedTab.value == 3, onClick = { selectedTab.value = 3 }) {
-                Text(
-                    "Otm ro`yxati",
-                    modifier = Modifier.padding(12.dp),
-                    style = MaterialTheme.typography.titleLarge
-                )
-            }
-            Tab(selected = selectedTab.value == 4, onClick = { selectedTab.value = 4 }) {
-                Text(
-                    "Jadvallar",
-                    modifier = Modifier.padding(12.dp),
-                    style = MaterialTheme.typography.titleLarge
-                )
-            }
-        }
-        when (selectedTab.value) {
-            0 -> UmumiyTab()
-            1 -> TalabalarTab()
-            2 -> TeacherTab()
-            3 -> OtmTab()
-            4 -> TableTab()
-        }
-    }
-}
+import us.smt.educationstatisticuz.ui.component.CircularDiagram
+import us.smt.educationstatisticuz.ui.component.UzbekistanMap
+import us.smt.educationstatisticuz.ui.component.VerticalDiagram
 
 @Composable
-fun UmumiyTab(modifier: Modifier = Modifier) {
+fun OliyTalimUmumiyTab(
+    viewmodel: OliyTalimUmumiyTalimViewmodel = viewModel()
+) {
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
         contentPadding = PaddingValues(vertical = 16.dp, horizontal = 12.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         item {
-
             Card(
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(16.dp)
@@ -215,7 +151,7 @@ fun UmumiyTab(modifier: Modifier = Modifier) {
                         .padding(16.dp),
                     contentAlignment = Alignment.Center
                 ) {
-                    UzbekistanMap()
+                    UzbekistanMap(map = viewmodel.mapRegions.toMap())
                 }
             }
         }
@@ -348,52 +284,10 @@ fun UmumiyTab(modifier: Modifier = Modifier) {
     }
 }
 
-@Composable
-fun TalabalarTab(modifier: Modifier = Modifier) {
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
-    ) {
-        Text("Qilinmoqda")
-    }
-}
 
-@Composable
-fun TeacherTab(modifier: Modifier = Modifier) {
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
-    ) {
-        Text("Qilinmoqda")
-    }
-}
-
-@Composable
-fun OtmTab(modifier: Modifier = Modifier) {
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
-    ) {
-        Text("Qilinmoqda")
-    }
-}
-
-@Composable
-fun TableTab(modifier: Modifier = Modifier) {
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
-    ) {
-        Text("Qilinmoqda")
-    }
-}
 
 @Preview
 @Composable
-private fun UmumiyTabPrev() {
-    UmumiyTab()
+private fun OliyTalimUmumiyTabPrev() {
+    OliyTalimUmumiyTab()
 }

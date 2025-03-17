@@ -1,4 +1,4 @@
-package us.smt.educationstatisticuz.component
+package us.smt.educationstatisticuz.ui.component
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -39,7 +39,7 @@ import us.smt.educationstatisticuz.model.DiagramData
 fun VerticalDiagram(
     color: Color,
     count: Int,
-    paddingStart:Dp=32.dp,
+    paddingStart: Dp = 32.dp,
     data: CommonDiagramData<DiagramData>
 ) {
     val isOpen = remember {
@@ -56,7 +56,7 @@ fun VerticalDiagram(
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(start = 16.dp, end = 8.dp, top = 8.dp),
+                .padding(start = 16.dp, end = 8.dp, top = 8.dp, bottom = 12.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
@@ -166,7 +166,7 @@ fun VerticalDiagram(
 }
 
 
-private fun getMinimum(value: Int, count: Int): Int {
+fun getMinimum(value: Int, count: Int): Int {
     val t = value.toDouble() / count.toDouble()
     return when (t.toInt()) {
         in 1..9 -> {
