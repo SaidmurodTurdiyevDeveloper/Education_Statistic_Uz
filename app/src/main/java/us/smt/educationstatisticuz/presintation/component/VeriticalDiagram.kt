@@ -1,6 +1,7 @@
 package us.smt.educationstatisticuz.presintation.component
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -20,8 +21,10 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -32,7 +35,8 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import us.smt.educationstatisticuz.model.CommonDiagramData
-import us.smt.educationstatisticuz.model.DiagramData
+import us.smt.educationstatisticuz.model.DiagramDataWithColor
+import us.smt.educationstatisticuz.model.DiagramType
 import kotlin.math.ceil
 
 
@@ -41,7 +45,7 @@ fun VerticalDiagram(
     color: Color,
     count: Int,
     paddingStart: Dp = 32.dp,
-    data: CommonDiagramData<DiagramData>
+    data: CommonDiagramData
 ) {
     val isOpen = remember {
         mutableStateOf(false)
@@ -49,6 +53,8 @@ fun VerticalDiagram(
     val selected = remember {
         mutableStateOf(data.types.keys.first())
     }
+    var selectedBlock by remember { mutableStateOf<DiagramDataWithColor?>(null) }
+
     val maxValue = data.types[selected.value]?.maxBy { it.value }
     val minimum = getMinimum(maxValue?.value ?: 0, count)
     Card(
@@ -139,14 +145,26 @@ fun VerticalDiagram(
                     data.types[selected.value]?.forEach { item ->
                         item {
                             val height = 300 * item.value.toDouble() / (minimum * count)
-                            Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                            Column(
+                                horizontalAlignment = Alignment.CenterHorizontally,
+                                modifier = Modifier.clickable(
+                                    onClick = {
+                                        selectedBlock = item
+                                    }
+                                )) {
                                 Box(
                                     modifier = Modifier
                                         .height(height.dp)
                                         .padding(horizontal = 20.dp)
                                         .width(56.dp)
                                         .background(
-                                            color = color, shape = RoundedCornerShape(4.dp)
+                                            color = if (item == selectedBlock) color.copy(
+                                                alpha = 0.9f,
+                                                red = 1f,
+                                                blue = 0.6f,
+                                                green = 0.4f
+                                            ) else color,
+                                            shape = RoundedCornerShape(4.dp)
                                         )
                                 )
                                 Text(
@@ -160,6 +178,19 @@ fun VerticalDiagram(
                             }
                         }
                     }
+                }
+            }
+            Spacer(modifier = Modifier.height(12.dp))
+            selectedBlock?.let { label ->
+                Box(
+                    modifier = Modifier
+                        .padding(8.dp)
+                ) {
+                    Text(
+                        text = label.name + ": " + label.value.toString(),
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 16.sp
+                    )
                 }
             }
         }
@@ -223,18 +254,31 @@ private fun CircularDiagramPrev() {
         color = Color.Green,
         count = 4,
         data = CommonDiagramData(
-            title = "Talabalar soni jins kesimida\n", types = mapOf(
+            title = "Talabalar soni jins kesimida\n",
+            type = DiagramType.VERTICAL,
+            count = 5,
+            color = Color.Green,
+            paddingStart = 30,
+            types = mapOf(
                 "Jami" to listOf(
-                    DiagramData(
-                        name = "Erkaklar", value = 154
-                    ), DiagramData(
-                        name = "Ayollar", value = 56
+                    DiagramDataWithColor(
+                        name = "Erkaklar",
+                        value = 154,
+                        color = Color.White
+                    ), DiagramDataWithColor(
+                        name = "Ayollar",
+                        value = 56,
+                        color = Color.White
                     )
                 ), "Davlat" to listOf(
-                    DiagramData(
-                        name = "Erkaklar", value = 16
-                    ), DiagramData(
-                        name = "Ayollar", value = 50
+                    DiagramDataWithColor(
+                        name = "Erkaklar",
+                        value = 16,
+                        color = Color.White
+                    ), DiagramDataWithColor(
+                        name = "Ayollar",
+                        value = 50,
+                        color = Color.White
                     )
                 )
             )

@@ -38,6 +38,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -46,10 +47,12 @@ import us.smt.educationstatisticuz.presintation.screens.doctarantura.Doctrantura
 import us.smt.educationstatisticuz.presintation.screens.doctarantura.doktantura
 import us.smt.educationstatisticuz.presintation.screens.oliy_talim.OliyTalimScreen
 import us.smt.educationstatisticuz.presintation.screens.oliy_talim.oliyTalimRoute
+import us.smt.educationstatisticuz.presintation.screens.oliy_talim.umuiy_tab.OliyTalimUmumiyTalimViewmodel
 import us.smt.educationstatisticuz.presintation.screens.professional_talim.ProfessionalTalimScreen
 import us.smt.educationstatisticuz.presintation.screens.professional_talim.professionalTalim
 import us.smt.educationstatisticuz.presintation.screens.qabul_screen.QabulScreen
 import us.smt.educationstatisticuz.presintation.screens.qabul_screen.qabul
+import us.smt.educationstatisticuz.ui.EducationStatisticUzTheme
 
 const val OLIY_TALIM = "Oliy ta'lim"
 const val PROFESSIONAL_TALIM = "Professional ta'lim"
@@ -202,7 +205,8 @@ fun AppNavHost() {
                         startDestination = oliyTalimRoute
                     ) {
                         composable(oliyTalimRoute) {
-                            OliyTalimScreen()
+                            val viewmodel = hiltViewModel<OliyTalimUmumiyTalimViewmodel>()
+                            OliyTalimScreen(viewmodel)
                         }
                         composable(professionalTalim) {
                             ProfessionalTalimScreen()

@@ -19,6 +19,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.BiasAlignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
@@ -27,15 +28,16 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import us.smt.educationstatisticuz.model.CommonDiagramData
-import us.smt.educationstatisticuz.model.DiagramData
+import us.smt.educationstatisticuz.model.DiagramDataWithColor
+import us.smt.educationstatisticuz.model.DiagramType
 
 
 @Composable
-fun StudentChartScreen(
+fun HorizontalScreen(
     color: Color,
     count: Int,
     paddingStart: Dp = 32.dp,
-    data: CommonDiagramData<DiagramData>
+    data: CommonDiagramData
 ) {
 
     val isOpen = remember {
@@ -51,7 +53,6 @@ fun StudentChartScreen(
             .fillMaxSize()
             .padding(16.dp)
     ) {
-        // Header with Dropdown
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween,
@@ -83,7 +84,6 @@ fun StudentChartScreen(
         }
         Spacer(modifier = Modifier.height(16.dp))
 
-        // Bar Chart
         Column(modifier = Modifier.fillMaxWidth()) {
             data.types[selected.value]?.forEach { item ->
                 BarChartItem(
@@ -92,12 +92,6 @@ fun StudentChartScreen(
                     value = item.value,
                     maxValue = (maxValue?.value) ?: 0
                 )
-            }
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-            ) {
-
             }
         }
     }
@@ -153,25 +147,35 @@ fun BarChartItem(label: String, value: Int, color: Color, maxValue: Int) {
 
 @Preview
 @Composable
-private fun StudentChartScreenPrev() {
+private fun HorizontalScreenPrev() {
     MaterialTheme {
         Surface {
-            StudentChartScreen(
+            HorizontalScreen(
                 color = Color.Cyan,
                 count = 4,
                 data = CommonDiagramData(
-                    title = "Talabalar soni jins kesimida\n", types = mapOf(
+                    type = DiagramType.VERTICAL,
+                    count = 5,
+                    color = Color.Green,
+                    paddingStart = 30,
+                    title = "Talabalar soni jins kesimida\n",
+                    types = mapOf(
                         "Jami" to listOf(
-                            DiagramData(
-                                name = "Erkaklar", value = 716267
-                            ), DiagramData(
-                                name = "Ayollar", value = 56
+                            DiagramDataWithColor(
+                                name = "Erkaklar",
+                                value = 716267,
+                                color = Color.Red
+                            ), DiagramDataWithColor(
+                                name = "Ayollar", value = 56,
+                                color = Color.Red
                             )
                         ), "Davlat" to listOf(
-                            DiagramData(
-                                name = "Erkaklar", value = 16
-                            ), DiagramData(
-                                name = "Ayollar", value = 50
+                            DiagramDataWithColor(
+                                name = "Erkaklar", value = 16,
+                                color = Color.Red
+                            ), DiagramDataWithColor(
+                                name = "Ayollar", value = 50,
+                                color = Color.Red
                             )
                         )
                     )

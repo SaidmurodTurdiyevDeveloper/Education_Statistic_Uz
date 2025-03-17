@@ -1,11 +1,23 @@
 package us.smt.educationstatisticuz.presintation.screens.oliy_talim.umuiy_tab
 
-import androidx.compose.runtime.mutableStateMapOf
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
+import us.smt.educationstatisticuz.domen.repository.OliyTalimRepository
 import us.smt.educationstatisticuz.presintation.component.Region
+import javax.inject.Inject
 
-class OliyTalimUmumiyTalimViewmodel : ViewModel() {
-    val mapRegions = mutableStateMapOf(
+@HiltViewModel
+class OliyTalimUmumiyTalimViewmodel @Inject constructor(
+    private val repository: OliyTalimRepository
+) : ViewModel() {
+    private val mapRegions = mapOf(
         Region.KARAKALPAKSTAN to 12,
         Region.KHOREZM to 8,
         Region.NAVOI to 3,
@@ -21,4 +33,22 @@ class OliyTalimUmumiyTalimViewmodel : ViewModel() {
         Region.FERGANA to 13,
         Region.ANDIJAN to 9,
     )
+    private val _state = MutableStateFlow(
+        OliyTalimUmumiyState(
+            map = mapRegions
+        )
+    )
+    val state: StateFlow<OliyTalimUmumiyState> = _state.asStateFlow()
+
+    init {
+        viewModelScope.launch {
+            repository.loadHomeStudentStatistic().collectLatest { result ->
+                _state.update {
+                    state.value.copy(
+                        first = result
+                    )
+                }
+            }
+        }
+    }
 }

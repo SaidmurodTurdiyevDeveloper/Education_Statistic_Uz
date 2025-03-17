@@ -1,6 +1,7 @@
 package us.smt.educationstatisticuz.presintation.component
 
 import android.annotation.SuppressLint
+import android.util.Log
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.detectTapGestures
@@ -44,6 +45,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import us.smt.educationstatisticuz.model.CommonDiagramData
 import us.smt.educationstatisticuz.model.DiagramDataWithColor
+import us.smt.educationstatisticuz.model.DiagramType
 import kotlin.math.atan2
 import kotlin.math.pow
 import kotlin.math.sqrt
@@ -53,13 +55,13 @@ import kotlin.math.sqrt
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun CircularDiagram(
-    data: CommonDiagramData<DiagramDataWithColor>
+    data: CommonDiagramData
 ) {
     val selected = remember {
         mutableStateOf(data.types.keys.first())
     }
+
     var selectedSlice by remember { mutableStateOf<DiagramDataWithColor?>(null) }
-    var tapOffset by remember { mutableStateOf(Offset.Zero) }
     val isOpen = remember {
         mutableStateOf(false)
     }
@@ -99,53 +101,49 @@ fun CircularDiagram(
                         },
                         select = {
                             selected.value = it
+                            selectedSlice = null
                         }
                     )
                 }
             }
-            Spacer(modifier = Modifier.height(32.dp))
-
             Box(
                 contentAlignment = Alignment.Center,
                 modifier = Modifier
             ) {
-                Canvas(modifier =Modifier
-                    .size(200.dp)
-                    .pointerInput(Unit) {
-                        detectTapGestures { offset ->
-                            var startAngle = -90f
-                            val canvasSize = 200f
-                            val radius = canvasSize / 2
-                            val center = Offset(radius, radius) // Dinamik markaz
+                Canvas(
+                    modifier = Modifier
+                        .size(300.dp)
+                        .pointerInput(Unit) {
+                            detectTapGestures { offset ->
+                                val canvasSize = size.width.dp.value
+                                val radius = canvasSize / 2
+                                val center = Offset(radius, radius)
+                                val distance = sqrt(
+                                    (offset.x - center.x).pow(2) + (offset.y - center.y).pow(2)
+                                )
 
-                            // Bosilgan joyning markazdan uzoqligini tekshiramiz
-                            val distance = sqrt(
-                                (offset.x - center.x).pow(2) + (offset.y - center.y).pow(2)
-                            )
+                                if (distance in (radius - 200.dp.value)..radius) {
+                                    var tappedAngle = Math.toDegrees(
+                                        atan2(
+                                            (offset.y - center.y).toDouble(),
+                                            (offset.x - center.x).toDouble()
+                                        )
+                                    ).toFloat() + 90f
 
-                            if (distance in (radius - 75f)..radius) { // Radius ichida bo'lsa
-                                var tappedAngle = Math.toDegrees(
-                                    atan2(
-                                        (offset.y - center.y).toDouble(),
-                                        (offset.x - center.x).toDouble()
-                                    )
-                                ).toFloat() + 90f
+                                    if (tappedAngle < 0) tappedAngle += 360f
+                                    var tempAngle = 0f
+                                    data.types[selected.value]?.forEach { value ->
+                                        val angle = (value.value.toFloat() / all) * 360f + tempAngle
+                                        if (tappedAngle in tempAngle..(tempAngle + angle)) {
+                                            selectedSlice = value
+                                        }
 
-                                if (tappedAngle < 0) tappedAngle += 360f // Manfiy burchaklarni tuzatish
-
-                                data.types[selected.value]?.forEach { value ->
-                                    val angle = value.value / all * 360f
-
-                                    if (tappedAngle in startAngle..(startAngle + angle)) {
-                                        selectedSlice = value
-                                        tapOffset = offset
+                                        tempAngle = angle
                                     }
-
-                                    startAngle += angle
                                 }
                             }
                         }
-                    }
+                        .padding(40.dp)
 
                 ) {
                     var startAngle = -90f
@@ -156,7 +154,10 @@ fun CircularDiagram(
                             startAngle = startAngle + 1f,
                             sweepAngle = angle - 1f,
                             useCenter = false,
-                            style = Stroke(width = 150f, cap = StrokeCap.Butt),
+                            style = Stroke(
+                                width = if (diagramData == selectedSlice) 165f else 150f,
+                                cap = StrokeCap.Butt
+                            ),
                             size = Size(size.width, size.height)
                         )
                         startAngle += angle
@@ -167,10 +168,9 @@ fun CircularDiagram(
                     text = all.toString(),
                     fontSize = 20.sp,
                     fontWeight = FontWeight.Bold,
-                    color = Color.Black
+                    color = MaterialTheme.typography.titleLarge.color
                 )
             }
-            Spacer(modifier = Modifier.height(56.dp))
             FlowRow(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -193,7 +193,10 @@ fun CircularDiagram(
                             fontSize = 14.sp
                         )
                         Spacer(modifier = Modifier.width(4.dp))
-                        val formatted = String.format("%.2f", (diagramData.value.toDouble() / all.toDouble() * 100.0))
+                        val formatted = String.format(
+                            "%.2f",
+                            (diagramData.value.toDouble() / all.toDouble() * 100.0)
+                        )
                         Text(
                             text = "$formatted%",
                             style = MaterialTheme.typography.bodyMedium,
@@ -204,34 +207,34 @@ fun CircularDiagram(
                     }
                 }
             }
-            Spacer(modifier = Modifier.height(32.dp))
+            Spacer(modifier = Modifier.height(12.dp))
+            selectedSlice?.let { label ->
+                Box(
+                    modifier = Modifier
+                        .padding(8.dp)
+                ) {
+                    Text(
+                        text = buildAnnotatedString {
+                            append(label.name)
+                            append(" ")
+                            withStyle(
+                                style = SpanStyle(
+                                    color = label.color,
+                                    fontWeight = FontWeight.Bold
+                                )
+                            ) {
+                                append(label.value.toString())
+                            }
+                        },
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 16.sp
+                    )
+                }
+                Spacer(modifier = Modifier.height(24.dp))
+            }
         }
     }
-    selectedSlice?.let { label ->
-        Box(
-            modifier = Modifier
-                .offset { IntOffset(tapOffset.x.toInt(), tapOffset.y.toInt()) }
-                .background(Color.White, shape = RoundedCornerShape(8.dp))
-                .padding(8.dp)
-        ) {
-            Text(
-                text = buildAnnotatedString {
-                    append(label.name)
-                    append(" ")
-                    withStyle(
-                        style = SpanStyle(
-                            color = label.color,
-                            fontWeight = FontWeight.Bold
-                        )
-                    ) {
-                        append(label.value.toString())
-                    }
-                },
-                fontWeight = FontWeight.Bold,
-                fontSize = 16.sp
-            )
-        }
-    }
+
 }
 
 
@@ -240,7 +243,12 @@ fun CircularDiagram(
 private fun CircularDiagramPrev() {
     CircularDiagram(
         data = CommonDiagramData(
-            title = "Talabalar soni jins kesimida\n", types = mapOf(
+            title = "Talabalar soni jins kesimida\n",
+            type = DiagramType.CIRCULAR,
+            count = 5,
+            color = Color.Green,
+            paddingStart = 30,
+            types = mapOf(
                 "Jami" to listOf(
                     DiagramDataWithColor(
                         name = "Erkaklar", value = 154, color = Color.Blue

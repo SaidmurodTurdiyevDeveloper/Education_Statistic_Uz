@@ -13,18 +13,20 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import us.smt.educationstatisticuz.presintation.screens.oliy_talim.otm_tab.OliyTalimOtmTab
 import us.smt.educationstatisticuz.presintation.screens.oliy_talim.student_tab.OliyTalimStudentTab
 import us.smt.educationstatisticuz.presintation.screens.oliy_talim.table_tab.OliyTalimTableTab
 import us.smt.educationstatisticuz.presintation.screens.oliy_talim.teacher_tab.OliyTalimTeacherTab
 import us.smt.educationstatisticuz.presintation.screens.oliy_talim.umuiy_tab.OliyTalimUmumiyTab
+import us.smt.educationstatisticuz.presintation.screens.oliy_talim.umuiy_tab.OliyTalimUmumiyTalimViewmodel
 
 const val oliyTalimRoute = "oliy_talim_screen"
 
 @Composable
-fun OliyTalimScreen() {
+fun OliyTalimScreen(
+    umumitViewModel:OliyTalimUmumiyTalimViewmodel
+) {
     val selectedTab = remember {
         mutableIntStateOf(0)
     }
@@ -73,17 +75,11 @@ fun OliyTalimScreen() {
             }
         }
         when (selectedTab.intValue) {
-            0 -> OliyTalimUmumiyTab()
+            0 -> OliyTalimUmumiyTab(viewmodel = umumitViewModel)
             1 -> OliyTalimStudentTab()
             2 -> OliyTalimTeacherTab()
             3 -> OliyTalimOtmTab()
             4 -> OliyTalimTableTab()
         }
     }
-}
-
-@Preview
-@Composable
-private fun OliyTalimScreenPrev() {
-    OliyTalimScreen()
 }
