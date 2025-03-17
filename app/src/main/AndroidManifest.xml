@@ -10,10 +10,11 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:name=".app.EducationApp"
         android:theme="@style/Theme.EducationStatisticUz"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name=".presintation.screen.MainActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.EducationStatisticUz">

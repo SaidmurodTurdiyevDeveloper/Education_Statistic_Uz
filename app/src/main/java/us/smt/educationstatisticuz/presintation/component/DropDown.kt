@@ -1,4 +1,4 @@
-package us.smt.educationstatisticuz.component
+package us.smt.educationstatisticuz.presintation.component
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth

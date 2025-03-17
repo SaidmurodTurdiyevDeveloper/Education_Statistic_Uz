@@ -1,4 +1,4 @@
-package us.smt.educationstatisticuz
+package us.smt.educationstatisticuz.presintation.screen.qabul
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -8,9 +8,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 
-const val professionalTalim = "ProfessionalTalim"
+const val qabul = "Qabul"
+
 @Composable
-fun ProfessionalTalimScreen(modifier: Modifier = Modifier) {
+fun QabulScreen(modifier: Modifier = Modifier) {
     Column(
         modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,

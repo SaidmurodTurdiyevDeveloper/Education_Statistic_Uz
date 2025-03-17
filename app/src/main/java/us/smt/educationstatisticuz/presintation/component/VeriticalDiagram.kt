@@ -1,4 +1,4 @@
-package us.smt.educationstatisticuz.component
+package us.smt.educationstatisticuz.presintation.component
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -33,6 +33,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import us.smt.educationstatisticuz.model.CommonDiagramData
 import us.smt.educationstatisticuz.model.DiagramData
+import kotlin.math.ceil
 
 
 @Composable
@@ -170,47 +171,47 @@ private fun getMinimum(value: Int, count: Int): Int {
     val t = value.toDouble() / count.toDouble()
     return when (t.toInt()) {
         in 1..9 -> {
-            kotlin.math.ceil(t).toInt()
+            ceil(t).toInt()
         }
 
         in 10..99 -> {
-            kotlin.math.ceil(t / 10).toInt() * 10
+            ceil(t / 10).toInt() * 10
         }
 
         in 100..999 -> {
-            kotlin.math.ceil(t / 100).toInt() * 100
+            ceil(t / 100).toInt() * 100
         }
 
         in 1000..9999 -> {
-            kotlin.math.ceil(t / 1000).toInt() * 1000
+            ceil(t / 1000).toInt() * 1000
         }
 
         in 10000..99999 -> {
-            kotlin.math.ceil(t / 10000).toInt() * 10000
+            ceil(t / 10000).toInt() * 10000
         }
 
         in 100000..999999 -> {
-            kotlin.math.ceil(t / 100000).toInt() * 100000
+            ceil(t / 100000).toInt() * 100000
         }
 
         in 1000000..9999999 -> {
-            kotlin.math.ceil(t / 1000000).toInt() * 1000000
+            ceil(t / 1000000).toInt() * 1000000
         }
 
         in 10000000..99999999 -> {
-            kotlin.math.ceil(t / 10000000).toInt() * 10000000
+            ceil(t / 10000000).toInt() * 10000000
         }
 
         in 100000000..999999999 -> {
-            kotlin.math.ceil(t / 100000000).toInt() * 100000000
+            ceil(t / 100000000).toInt() * 100000000
         }
 
         in 1000000000..Int.MAX_VALUE -> {
-            kotlin.math.ceil(t / 1000000000).toInt() * 1000000000
+            ceil(t / 1000000000).toInt() * 1000000000
         }
 
         else -> {
-            kotlin.math.ceil(t).toInt()
+            ceil(t).toInt()
         }
     }
 }

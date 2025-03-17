@@ -1,11 +1,10 @@
-package us.smt.educationstatisticuz
+package us.smt.educationstatisticuz.presintation.screen
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.background
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -45,9 +44,19 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-import us.smt.educationstatisticuz.ui.theme.EducationStatisticUzTheme
+import us.smt.educationstatisticuz.presintation.screen.oliy_talim.OliyTalimScreen
+import us.smt.educationstatisticuz.presintation.screen.professional_talim.ProfessionalTalimScreen
+import us.smt.educationstatisticuz.presintation.screen.qabul.QabulScreen
+import us.smt.educationstatisticuz.presintation.screen.oliy_talim.oliyTalim
+import us.smt.educationstatisticuz.presintation.screen.doctarantura.DoctranturaScreen
+import us.smt.educationstatisticuz.presintation.screen.doctarantura.doktantura
+import us.smt.educationstatisticuz.presintation.ui.theme.EducationStatisticUzTheme
+import us.smt.educationstatisticuz.presintation.screen.professional_talim.professionalTalim
+import us.smt.educationstatisticuz.presintation.screen.qabul.qabul
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -92,14 +101,14 @@ private fun MainScreen() {
                         }) {
                             Icon(
                                 Icons.AutoMirrored.Filled.ArrowBack,
-                                tint = if(isDarkMode.value) Color.White else Color.Black,
+                                tint = if (isDarkMode.value) Color.White else Color.Black,
                                 contentDescription = "Orqaga"
                             )
                         }
                         Spacer(modifier = Modifier.width(12.dp))
                         Text(
                             text = "Mening Ilovam",
-                            color = if(isDarkMode.value) Color.White else Color.Black,
+                            color = if (isDarkMode.value) Color.White else Color.Black,
                             fontSize = 20.sp, fontWeight = FontWeight.Bold
                         )
                     }
@@ -166,7 +175,7 @@ private fun MainScreen() {
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.SpaceBetween
                     ) {
-                        Text("Tungi rejim", color = if(isDarkMode.value) Color.White else Color.Black)
+                        Text("Tungi rejim", color = if (isDarkMode.value) Color.White else Color.Black)
                         Switch(
                             checked = isDarkMode.value,
                             onCheckedChange = {

@@ -1,4 +1,4 @@
-package us.smt.educationstatisticuz.ui.theme
+package us.smt.educationstatisticuz.presintation.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

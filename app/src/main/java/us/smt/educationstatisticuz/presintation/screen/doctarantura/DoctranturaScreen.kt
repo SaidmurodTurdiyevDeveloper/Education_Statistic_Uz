@@ -1,4 +1,4 @@
-package us.smt.educationstatisticuz
+package us.smt.educationstatisticuz.presintation.screen.doctarantura
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

@@ -1,4 +1,4 @@
-package us.smt.educationstatisticuz.component
+package us.smt.educationstatisticuz.presintation.component
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.Canvas

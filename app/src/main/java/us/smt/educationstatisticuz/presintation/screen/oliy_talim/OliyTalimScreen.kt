@@ -1,4 +1,4 @@
-package us.smt.educationstatisticuz
+package us.smt.educationstatisticuz.presintation.screen.oliy_talim
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -22,9 +22,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import us.smt.educationstatisticuz.component.CircularDiagram
-import us.smt.educationstatisticuz.component.UzbekistanMap
-import us.smt.educationstatisticuz.component.VerticalDiagram
+import us.smt.educationstatisticuz.presintation.component.CircularDiagram
+import us.smt.educationstatisticuz.presintation.component.UzbekistanMap
+import us.smt.educationstatisticuz.presintation.component.VerticalDiagram
 import us.smt.educationstatisticuz.model.CommonDiagramData
 import us.smt.educationstatisticuz.model.DiagramData
 import us.smt.educationstatisticuz.model.DiagramDataWithColor

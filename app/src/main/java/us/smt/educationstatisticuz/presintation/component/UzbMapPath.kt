@@ -1,4 +1,4 @@
-package us.smt.educationstatisticuz.component
+package us.smt.educationstatisticuz.presintation.component
 
 import androidx.compose.ui.graphics.Path
 
