@@ -83,7 +83,7 @@ fun OliyTalimUmumiyTab(
                 )
             }
         }
-        items(state.value.first) {
+        items(state.value.common) {
             ItemDiagram(it)
         }
 
@@ -102,7 +102,10 @@ fun OliyTalimUmumiyTab(
                 }
             }
         }
-        items(state.value.second) {
+        items(state.value.students) {
+            ItemDiagram(it)
+        }
+        items(state.value.professor) {
             ItemDiagram(it)
         }
     }

@@ -1,4 +1,4 @@
-package us.smt.educationstatisticuz.data.api
+package us.smt.educationstatisticuz.di
 
 import dagger.Binds
 import dagger.Module
@@ -12,5 +12,5 @@ import us.smt.educationstatisticuz.domen.repository.OliyTalimRepository
 interface RepositoryModule {
 
     @Binds
-    fun bindOliyTalimRepository(repository: OliyTalimRepositoryImpl):OliyTalimRepository
+    fun bindOliyTalimRepository(repository: OliyTalimRepositoryImpl): OliyTalimRepository
 }

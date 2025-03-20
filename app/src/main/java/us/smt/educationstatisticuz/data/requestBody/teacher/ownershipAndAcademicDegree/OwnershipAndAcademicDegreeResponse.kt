@@ -1,0 +1,3 @@
+package us.smt.educationstatisticuz.data.requestBody.teacher.ownershipAndAcademicDegree
+
+class OwnershipAndAcademicDegreeResponse : ArrayList<OwnershipAndAcademicDegreeResponseItem>()

@@ -1,0 +1,3 @@
+package us.smt.educationstatisticuz.data.requestBody.teacher.ownershipAndAcademicRank
+
+class OwnershipAndAcademicRankResponse : ArrayList<OwnershipAndAcademicRankResponseItem>()

@@ -8,6 +8,7 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import us.smt.educationstatisticuz.data.api.RegionApi
 import us.smt.educationstatisticuz.data.api.StudentStatisticApi
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
@@ -42,6 +43,18 @@ object NetworkModule {
             .client(client)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
+
+    @Provides
+    @Singleton
+    fun providesRegionApi(client: OkHttpClient): RegionApi {
+        val retrofit=Retrofit.Builder()
+            .baseUrl("https://prof-emis.edu.uz/")
+            .client(client)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+        return retrofit.create(RegionApi::class.java)
+    }
+
 
     @Provides
     @Singleton
