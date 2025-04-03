@@ -1,0 +1,3 @@
+package us.smt.educationstatisticuz.data.requestBody.student.ownershipAndPaymentType
+
+class OwnershipAndPaymentTypeResponse : ArrayList<OwnershipAndPaymentTypeResponseItem>()
