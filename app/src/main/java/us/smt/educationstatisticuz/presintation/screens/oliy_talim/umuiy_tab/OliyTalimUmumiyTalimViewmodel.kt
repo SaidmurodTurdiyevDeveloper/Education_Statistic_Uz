@@ -20,7 +20,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class OliyTalimUmumiyTalimViewmodel @Inject constructor(
-    private val repository: OliyTalimRepository
+//    private val repository: OliyTalimRepository
 ) : ViewModel() {
     private val mapRegions = mapOf(
         Region.KARAKALPAKSTAN to 12,
@@ -110,16 +110,16 @@ class OliyTalimUmumiyTalimViewmodel @Inject constructor(
         )
     )
     val state: StateFlow<OliyTalimUmumiyState> = _state.asStateFlow()
-
-    init {
-        viewModelScope.launch {
-            repository.loadHomeStudentStatistic().collectLatest { result ->
-                _state.update {
-                    state.value.copy(
-                        students = result
-                    )
-                }
-            }
-        }
-    }
+//
+//    init {
+//        viewModelScope.launch {
+//            repository.loadHomeStudentStatistic().collectLatest { result ->
+//                _state.update {
+//                    state.value.copy(
+//                        students = result
+//                    )
+//                }
+//            }
+//        }
+//    }
 }

@@ -28,17 +28,18 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import us.smt.educationstatisticuz.model.University
 
 
 @Composable
-fun OliyTalimOtmTab(viewModel: OliyTalimOtmViewModel = viewModel()) {
+fun OliyTalimOtmTab(viewModel: OliyTalimOtmViewModel) {
     var selectedOwnership by remember { mutableStateOf("Barchasi") }
 
-    Column(modifier = Modifier
-        .fillMaxSize()
-        .padding(16.dp)) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp)
+    ) {
         Text("Oliy ta'lim muassasalari ro'yxati", fontWeight = FontWeight.Bold)
 
         Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {

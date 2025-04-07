@@ -47,11 +47,14 @@ import us.smt.educationstatisticuz.presintation.screens.doctarantura.Doctrantura
 import us.smt.educationstatisticuz.presintation.screens.doctarantura.doktantura
 import us.smt.educationstatisticuz.presintation.screens.oliy_talim.OliyTalimScreen
 import us.smt.educationstatisticuz.presintation.screens.oliy_talim.oliyTalimRoute
+import us.smt.educationstatisticuz.presintation.screens.oliy_talim.otm_tab.OliyTalimOtmViewModel
 import us.smt.educationstatisticuz.presintation.screens.oliy_talim.umuiy_tab.OliyTalimUmumiyTalimViewmodel
 import us.smt.educationstatisticuz.presintation.screens.professional_talim.ProfessionalTalimScreen
 import us.smt.educationstatisticuz.presintation.screens.professional_talim.professionalTalim
 import us.smt.educationstatisticuz.presintation.screens.qabul_screen.QabulScreen
 import us.smt.educationstatisticuz.presintation.screens.qabul_screen.qabul
+import us.smt.educationstatisticuz.presintation.screens.tab.TabNavHost
+import us.smt.educationstatisticuz.presintation.screens.tab.tabNavHostRoute
 import us.smt.educationstatisticuz.ui.EducationStatisticUzTheme
 
 const val OLIY_TALIM = "Oliy ta'lim"
@@ -202,11 +205,15 @@ fun AppNavHost() {
                     NavHost(
                         modifier = Modifier.padding(innerPadding),
                         navController = navController,
-                        startDestination = oliyTalimRoute
+                        startDestination = tabNavHostRoute
                     ) {
+                        composable(tabNavHostRoute) {
+                            TabNavHost()
+                        }
                         composable(oliyTalimRoute) {
                             val viewmodel = hiltViewModel<OliyTalimUmumiyTalimViewmodel>()
-                            OliyTalimScreen(viewmodel)
+                            val oliyTalim = hiltViewModel<OliyTalimOtmViewModel>()
+                            OliyTalimScreen(viewmodel,oliyTalim)
                         }
                         composable(professionalTalim) {
                             ProfessionalTalimScreen()

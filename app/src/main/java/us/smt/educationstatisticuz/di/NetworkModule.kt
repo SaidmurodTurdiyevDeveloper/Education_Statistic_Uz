@@ -58,6 +58,6 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun providesAuthApiService(retrofit: Retrofit): StudentStatisticApi =
+    fun providesStudentStatisticApi(retrofit: Retrofit): StudentStatisticApi =
         retrofit.create(StudentStatisticApi::class.java)
 }
