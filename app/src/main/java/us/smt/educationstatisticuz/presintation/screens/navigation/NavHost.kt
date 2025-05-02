@@ -53,6 +53,8 @@ import us.smt.educationstatisticuz.presintation.screens.professional_talim.Profe
 import us.smt.educationstatisticuz.presintation.screens.professional_talim.professionalTalim
 import us.smt.educationstatisticuz.presintation.screens.qabul_screen.QabulScreen
 import us.smt.educationstatisticuz.presintation.screens.qabul_screen.qabul
+import us.smt.educationstatisticuz.presintation.screens.tab.TabNavHost
+import us.smt.educationstatisticuz.presintation.screens.tab.tabNavHostRoute
 import us.smt.educationstatisticuz.ui.EducationStatisticUzTheme
 
 const val OLIY_TALIM = "Oliy ta'lim"
@@ -203,12 +205,15 @@ fun AppNavHost() {
                     NavHost(
                         modifier = Modifier.padding(innerPadding),
                         navController = navController,
-                        startDestination = oliyTalimRoute
+                        startDestination = tabNavHostRoute
                     ) {
+                        composable(tabNavHostRoute) {
+                            TabNavHost()
+                        }
                         composable(oliyTalimRoute) {
                             val viewmodel = hiltViewModel<OliyTalimUmumiyTalimViewmodel>()
-                            val viewmodel2 = hiltViewModel<OliyTalimOtmViewModel>()
-                            OliyTalimScreen(viewmodel, viewmodel2)
+                            val oliyTalim = hiltViewModel<OliyTalimOtmViewModel>()
+                            OliyTalimScreen(viewmodel,oliyTalim)
                         }
                         composable(professionalTalim) {
                             ProfessionalTalimScreen()

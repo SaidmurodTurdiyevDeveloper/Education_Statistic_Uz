@@ -4,7 +4,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
@@ -70,7 +69,7 @@ fun OliyTalimScreen(
                 Text(
                     "Umumiy",
                     modifier = Modifier.padding(12.dp),
-                    color = if(selectedTab.intValue==0)Color.White else Color.Blue,
+                    color = if (selectedTab.intValue == 0) Color.White else Color.Blue,
                     style = MaterialTheme.typography.titleLarge
                 )
             }
@@ -83,7 +82,7 @@ fun OliyTalimScreen(
                 Text(
                     "Talabalar",
                     modifier = Modifier.padding(12.dp),
-                    color = if(selectedTab.intValue==1)Color.White else Color.Blue,
+                    color = if (selectedTab.intValue == 1) Color.White else Color.Blue,
                     style = MaterialTheme.typography.titleLarge
                 )
             }
@@ -94,7 +93,7 @@ fun OliyTalimScreen(
                 selected = selectedTab.intValue == 2, onClick = { selectedTab.intValue = 2 }) {
                 Text(
                     "O'qituvchilar",
-                    color = if(selectedTab.intValue==2)Color.White else Color.Blue,
+                    color = if (selectedTab.intValue == 2) Color.White else Color.Blue,
                     modifier = Modifier.padding(12.dp),
                     style = MaterialTheme.typography.titleLarge
                 )
@@ -106,7 +105,7 @@ fun OliyTalimScreen(
                 selected = selectedTab.intValue == 3, onClick = { selectedTab.intValue = 3 }) {
                 Text(
                     "Otm ro`yxati",
-                    color = if(selectedTab.intValue==3)Color.White else Color.Blue,
+                    color = if (selectedTab.intValue == 3) Color.White else Color.Blue,
                     modifier = Modifier.padding(12.dp),
                     style = MaterialTheme.typography.titleLarge
                 )
@@ -118,7 +117,7 @@ fun OliyTalimScreen(
                 selected = selectedTab.intValue == 4, onClick = { selectedTab.intValue = 4 }) {
                 Text(
                     "Jadvallar",
-                    color = if(selectedTab.intValue==4)Color.White else Color.Blue,
+                    color = if (selectedTab.intValue == 4) Color.White else Color.Blue,
                     modifier = Modifier.padding(12.dp),
                     style = MaterialTheme.typography.titleLarge
                 )
