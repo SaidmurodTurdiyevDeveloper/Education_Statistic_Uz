@@ -2,9 +2,12 @@ package us.smt.educationstatisticuz.presintation.screens.oliy_talim.otm_tab
 
 import androidx.compose.runtime.mutableStateListOf
 import androidx.lifecycle.ViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
 import us.smt.educationstatisticuz.model.University
+import javax.inject.Inject
 
-class OliyTalimOtmViewModel : ViewModel() {
+@HiltViewModel
+class OliyTalimOtmViewModel @Inject constructor() : ViewModel() {
     var universities = mutableStateListOf(
         University("Acharya University", "Nodavlat", "www.acharya.uz", "student.acharya.uz"),
         University(

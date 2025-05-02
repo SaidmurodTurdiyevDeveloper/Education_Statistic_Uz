@@ -23,6 +23,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import us.smt.educationstatisticuz.presintation.screens.oliy_talim.otm_tab.OliyTalimOtmTab
+import us.smt.educationstatisticuz.presintation.screens.oliy_talim.otm_tab.OliyTalimOtmViewModel
 import us.smt.educationstatisticuz.presintation.screens.oliy_talim.student_tab.OliyTalimStudentTab
 import us.smt.educationstatisticuz.presintation.screens.oliy_talim.table_tab.OliyTalimTableTab
 import us.smt.educationstatisticuz.presintation.screens.oliy_talim.teacher_tab.OliyTalimTeacherTab
@@ -33,7 +34,8 @@ const val oliyTalimRoute = "oliy_talim_screen"
 
 @Composable
 fun OliyTalimScreen(
-    umumitViewModel: OliyTalimUmumiyTalimViewmodel
+    umumitViewModel: OliyTalimUmumiyTalimViewmodel,
+    oliyTalimOtmViewModel: OliyTalimOtmViewModel
 ) {
     val selectedTab = remember {
         mutableIntStateOf(0)
@@ -126,7 +128,7 @@ fun OliyTalimScreen(
             0 -> OliyTalimUmumiyTab(viewmodel = umumitViewModel)
             1 -> OliyTalimStudentTab()
             2 -> OliyTalimTeacherTab()
-            3 -> OliyTalimOtmTab()
+            3 -> OliyTalimOtmTab(oliyTalimOtmViewModel)
             4 -> OliyTalimTableTab()
         }
     }

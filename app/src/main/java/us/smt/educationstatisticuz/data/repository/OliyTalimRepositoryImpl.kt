@@ -13,7 +13,7 @@ import us.smt.educationstatisticuz.ui.getRandomComposeColor
 import javax.inject.Inject
 import javax.inject.Singleton
 
-@Singleton
+
 class OliyTalimRepositoryImpl @Inject constructor(
     private val api: StudentStatisticApi
 ) : OliyTalimRepository {
@@ -425,7 +425,7 @@ class OliyTalimRepositoryImpl @Inject constructor(
         emit(ls)
     }
 
-    override fun loadTeacherStatistic(): Flow<List<CommonDiagramData>> =flow{
+    override fun loadTeacherStatistic(): Flow<List<CommonDiagramData>> = flow {
     }
 
 }

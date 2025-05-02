@@ -47,6 +47,7 @@ import us.smt.educationstatisticuz.presintation.screens.doctarantura.Doctrantura
 import us.smt.educationstatisticuz.presintation.screens.doctarantura.doktantura
 import us.smt.educationstatisticuz.presintation.screens.oliy_talim.OliyTalimScreen
 import us.smt.educationstatisticuz.presintation.screens.oliy_talim.oliyTalimRoute
+import us.smt.educationstatisticuz.presintation.screens.oliy_talim.otm_tab.OliyTalimOtmViewModel
 import us.smt.educationstatisticuz.presintation.screens.oliy_talim.umuiy_tab.OliyTalimUmumiyTalimViewmodel
 import us.smt.educationstatisticuz.presintation.screens.professional_talim.ProfessionalTalimScreen
 import us.smt.educationstatisticuz.presintation.screens.professional_talim.professionalTalim
@@ -206,7 +207,8 @@ fun AppNavHost() {
                     ) {
                         composable(oliyTalimRoute) {
                             val viewmodel = hiltViewModel<OliyTalimUmumiyTalimViewmodel>()
-                            OliyTalimScreen(viewmodel)
+                            val viewmodel2 = hiltViewModel<OliyTalimOtmViewModel>()
+                            OliyTalimScreen(viewmodel, viewmodel2)
                         }
                         composable(professionalTalim) {
                             ProfessionalTalimScreen()

@@ -33,12 +33,14 @@ import us.smt.educationstatisticuz.model.University
 
 
 @Composable
-fun OliyTalimOtmTab(viewModel: OliyTalimOtmViewModel = viewModel()) {
+fun OliyTalimOtmTab(viewModel: OliyTalimOtmViewModel) {
     var selectedOwnership by remember { mutableStateOf("Barchasi") }
 
-    Column(modifier = Modifier
-        .fillMaxSize()
-        .padding(16.dp)) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp)
+    ) {
         Text("Oliy ta'lim muassasalari ro'yxati", fontWeight = FontWeight.Bold)
 
         Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
@@ -99,8 +101,3 @@ fun UniversityRow(university: University) {
     }
 }
 
-@Preview
-@Composable
-private fun OliyTalimOtmTabPrev() {
-    OliyTalimOtmTab()
-}
