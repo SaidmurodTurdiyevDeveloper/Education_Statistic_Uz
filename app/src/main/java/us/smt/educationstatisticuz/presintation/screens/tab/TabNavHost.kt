@@ -1,8 +1,10 @@
 package us.smt.educationstatisticuz.presintation.screens.tab
 
-//noinspection UsingMaterialAndMaterial3Libraries
-//noinspection UsingMaterialAndMaterial3Libraries
+
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.icons.Icons
@@ -42,8 +44,9 @@ fun TabNavHost() {
     val navController = rememberNavController()
 
     Scaffold(
+        contentWindowInsets = WindowInsets(0, 0, 0, 0),
         bottomBar = {
-            BottomNavigation(backgroundColor = Color.White) {
+            BottomNavigation(backgroundColor = Color.White, modifier = Modifier.windowInsetsPadding(WindowInsets.navigationBars)) {
                 val navBackStackEntry by navController.currentBackStackEntryAsState()
                 val currentDestination = navBackStackEntry?.destination
                 topLevelRoutes.forEach { topLevelRoute ->
@@ -60,7 +63,7 @@ fun TabNavHost() {
                                 restoreState = true
                             }
                         },
-                        selectedContentColor = Color(0xFF2E7D32),
+                        selectedContentColor = Color(0xFF00A708),
                         unselectedContentColor = Color.Gray
                     )
                 }

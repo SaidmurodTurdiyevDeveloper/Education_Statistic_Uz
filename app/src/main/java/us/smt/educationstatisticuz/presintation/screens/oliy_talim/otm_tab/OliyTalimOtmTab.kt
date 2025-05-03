@@ -100,3 +100,15 @@ fun UniversityRow(university: University) {
     }
 }
 
+@Preview
+@Composable
+private fun UniversityRowPrev() {
+    UniversityRow(
+        University(
+            name = "Oliy ta'lim muassasasi",
+            ownership = "Davlat",
+            website = "https://www.example.com",
+            stats = "1-2-3-4-5-6"
+        )
+    )
+}

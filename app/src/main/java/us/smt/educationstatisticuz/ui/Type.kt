@@ -32,3 +32,5 @@ val Typography = Typography(
     )
     */
 )
+
+val SF_PRo_DISPLAY= FontFamily.Default
